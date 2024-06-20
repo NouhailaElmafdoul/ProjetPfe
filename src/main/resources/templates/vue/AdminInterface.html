@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ADMIN</title>
+    <link rel="icon" type="image/png" href="gpi.png">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            margin-top: 20px;
+            color: #1a202c;
+            text-align: left;
+        }
+        .main-body {
+            padding: 15px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .card-body {
+            text-align: center;
+        }
+        .card-header {
+            background-color: rgb(27, 140, 140);
+            color: white;
+            border-bottom: none;
+            border-radius: 10px 10px 0 0;
+        }
+        .card-title {
+            font-size: 1.2em;
+            margin-bottom: 0.5em;
+        }
+        .card-text {
+            font-size: 1em;
+            color: #555;
+        }
+        .sidebar .sidebar-title {
+            color: #1a202c;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+        .sidebar-item input[type="text"] {
+            border-radius: 5px;
+        }
+        .sidebar-item button {
+            border-radius: 5px;
+            color: white;
+        }
+        .btn-search {
+            background-color: rgb(27, 140, 140);
+            color: white;
+        }
+        .btn-search:hover {
+            background-color: rgb(24, 130, 130);
+        }
+    </style>
+</head>
+<body>
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+        <a href="acceuil" class="logo me-auto"><img src="../images/sophacentre1.png" alt="sopha">sophacentre</a>
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+                <li><a href="acceuil" class="active">Acceuil</a></li>
+                <li><a href="/deconnexion">Se déconnecter</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>    
+    </div>
+</header>
+<main id="main">
+    <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140); color: white;">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center">
+                <h2>Responsable</h2>
+                <ol>
+                    <li><a href="acceuil" style="color: white;">ACCEUIL</a></li>
+                    <li th:text="${user.prenom}" style="color: white;">Responsable</li>
+                </ol>
+            </div>
+        </div>
+    </section>  
+    <section id="blog" class="blog">
+        <div class="container" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="container">
+                        <h3>Statistiques</h3>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Client Majeur</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <th:block th:each="client : ${topClients}">
+                                                <li>Client: <span th:text="${client[0]} + ' ' + ${client[1]}"></span></li>
+                                                <li>Nombre de commandes: <span th:text="${client[2]}"></span></li>
+                                            </th:block>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Meilleure Vente</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-unstyled mt-3 mb-4">
+                                            <th:block th:each="produit : ${topSellingProducts}">
+                                                <li>Produit: <span th:text="${produit[0]}"></span>, Quantité vendue: <span th:text="${produit[1]}"></span></li>
+                                            </th:block>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Total net</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>Le revenu net: <span th:text="${totalGains}"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4 class="my-0 font-weight-normal">Courbe des ventes</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="salesChart" width="400" height="200"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar">
+                         <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form " >
+                <form id="search-form">
+                  <input type="text" id="search-input">
+                  <button style="background-color: rgb(1, 103, 103);" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+              </div>
+                        <br>
+                        <br>
+                        <div class="sidebar-item categories container">
+                            <ul>
+                                <li><a class="sidebar-title" href="monProfile">Mon profil</a></li>
+                                <li><a class="sidebar-title" href="creer_Produit">Gestion des produits</a></li>
+                                <li><a class="sidebar-title" href="toutesLesCommandes">Gestion des commandes</a></li>
+                                <li><a class="sidebar-title" href="#">Statistiques</a></li>
+                                <li><a class="sidebar-title" href="clientsRole2">visualiser les clients</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<script src="assets/vendor/aos/aos.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    fetch('/api/ventes/jour')
+        .then(response => response.json())
+        .then(data => {
+            const labels = data.map(vente => new Date(vente.date).toLocaleDateString());
+            const ventes = data.map(vente => vente.totalVentes);
+
+            var ctx = document.getElementById('salesChart').getContext('2d');
+            var salesChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Ventes',
+                        data: ventes,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        });
+</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="icon" type="image/png" href="gpi.png">
+  <title>SOPHA-RESPONSABLE</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+
+  <link href="assets/css/style.css" rel="stylesheet">
+
+     <style>
+        .registration-form{
+	padding: 80px 0;
+}
+
+.registration-form form{
+    background-color: #fff;
+   width:50%;
+    margin: auto;
+    padding: 50px 70px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.registration-form .form-icon{
+	text-align: center;
+ 
+    border-radius: 50%;
+    font-size: 40px;
+    color: white;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-bottom: 50px;
+    line-height: 100px;
+}
+
+.registration-form .item{
+	border-radius: 20px;
+    margin-bottom: 25px;
+    padding: 10px 20px;
+}
+
+.registration-form .create-account{
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+ 
+    border: none;
+    color: white;
+    margin-top: 20px;
+}
+
+.registration-form .social-media{
+    max-width: 600px;
+    background-color: #fff;
+    margin: auto;
+    padding: 35px 0;
+    text-align: center;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    color: #9fadca;
+    border-top: 1px solid #dee9ff;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+}
+
+.registration-form .social-icons{
+    margin-top: 30px;
+    margin-bottom: 16px;
+}
+
+.registration-form .social-icons a{
+    font-size: 23px;
+    margin: 0 3px;
+    border: 1px solid;
+    border-radius: 50%;
+    width: 45px;
+    display: inline-block;
+    height: 45px;
+    text-align: center;
+    background-color: #fff;
+    line-height: 45px;
+}
+
+.registration-form .social-icons a:hover{
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+@media (max-width: 576px) {
+    .registration-form form{
+        padding: 50px 20px;
+    }
+
+    .registration-form .form-icon{
+        width: 70px;
+        height: 70px;
+        font-size: 30px;
+        line-height: 70px;
+    }
+}
+
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+         <a href="acceuil" class="logo me-auto"><img src="../images/sophacentre1.png" alt="daret">SOPHACENTRE</a>
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a href="acceuil" class="active">Acceuil</a></li>
+              <li><a href="/deconnexion">Se déconnecter</a></li>
+              
+    
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+    
+        </div>
+      </header>
+
+  <main id="main">
+    <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140);">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Ajouter Produit</h2>
+          <ol>
+            <li><a href="Acceuil">ACCEUIL</a></li>
+            <li>Ajouter Produit</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+
+          <div class="col-lg-8 entries">
+         
+            <section id="services" class="services ">
+                <div class="container" data-aos="fade-up">
+                  <div class="row" style="margin-top: -8%;">
+                   
+                   
+                   <div class="container">
+        <div class="registration-form" >
+     
+   <form id="" name="" method="post" style="width: 100%; margin-top: -15%;" action="/ajouterProduit" th:object="${produit}" th:action="@{/ajouterProduit}" enctype="multipart/form-data">
+    <div class="row">
+        <div class="container-fluid">
+            <img src="/images/sophacentre1.png" style="width: 20%; text-align: center; margin-left: 40%; margin-top: -5%; margin-bottom: 3%;" alt="CoolBrand">
+        </div>
+        <div class="form-group">
+            <input type="text" name="nomProduit" class="form-control item" id="nom" placeholder="Nom de Produit" th:field="*{nomProduit}" th:errorClass="is-invalid">
+            <p th:if="${#fields.hasErrors('nomProduit')}" th:errors="*{nomProduit}" class="invalid-feedback"></p>
+        </div>
+        <div class="form-group">
+            <input type="number" name="quantite" class="form-control item" id="quantite" placeholder="La quantité de produit" th:field="*{quantite}" th:errorClass="is-invalid">
+            <p th:if="${#fields.hasErrors('quantite')}" th:errors="*{quantite}" class="invalid-feedback"></p>
+        </div>
+        <div class="form-group">
+            <input type="date" name="dateDeFabrication" class="form-control item" id="date" placeholder="Date de fabrication (jj/mm/aaaa)" th:field="*{dateDeFabrication}" th:errorClass="is-invalid">
+            <p th:if="${#fields.hasErrors('dateDeFabrication')}" th:errors="*{dateDeFabrication}" class="invalid-feedback"></p>
+        </div>
+        <div class="form-group">
+            <label for="role"></label>
+            <input type="date" name="dateDExpiration" class="form-control item" id="dateExpiration" placeholder="Date d'expiration (jj/mm/aaaa)" th:field="*{dateDExpiration}" th:errorClass="is-invalid">
+            </div>
+        <div class="form-group">
+            <input type="text" name="prix" class="form-control item" id="montant" placeholder="Prix de produit" th:field="*{prix}" th:errorClass="is-invalid">
+            <p th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}" class="invalid-feedback"></p>
+        </div>
+        <div class="form-group">
+            <input type="text" name="prixVente" class="form-control item" id="prixVente" placeholder="Prix de vente" th:field="*{prixVente}" th:errorClass="is-invalid">
+            <p th:if="${#fields.hasErrors('prixVente')}" th:errors="*{prixVente}" class="invalid-feedback"></p>
+        </div>
+        <div class="form-group">
+            <input type="file" name="imageFile" class="form-control item" id="image">
+        </div>
+        <div class="form-group">
+            <input style="background-color: rgb(1, 103, 103);width: 80%;margin-left: 50px;" type="submit" class="btn btn-block create-account" value="Envoyer">
+        </div>
+    	</div>
+		</form>
+		</div>
+		</div>
+		</div>
+		</div>
+      </section>
+      </div>
+      <div class="col-lg-4">
+
+            <div class="sidebar">
+
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form " >
+                <form action="">
+                  <input type="text">
+                  <button style="background-color: rgb(1, 103, 103);" type="submit"><i  class="bi bi-search"></i></button>
+                </form>
+              </div>
+             <br>
+             <br>
+              <div class="sidebar-item categories container" >
+               <ul>
+                  <li><a class="sidebar-title" href="monProfile">Mon profile</a></li>
+                  <li><a class="sidebar-title" href="creer_Produit">gestion des produit</a></li>
+                  <li><a class="sidebar-title" href="/produitsPerimes">Les produit perimer</a></li>
+                  <li><a class="sidebar-title" href="/produitsTermines">Les produit terminer</a></li>
+                  <li><a class="sidebar-title" href="toutesLesCommandes">gestion des commande</a></li>
+                  <li><a class="sidebar-title" href="#">Les ventes</a></li>
+                  <li><a class="sidebar-title" href="admin">Acceuil</a></li>
+                </ul>
+              </div>
+			</div>
+			</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        flatpickr("#date", {
+            dateFormat: "d/m/Y"
+        });
+        flatpickr("#dateExpiration", {
+            dateFormat: "d/m/Y"
+        });
+    });
+</script>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

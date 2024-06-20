@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mes Commandes</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <style>
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+
+        .custom-table thead th {
+            background-color: #1B8C8C;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        .custom-table tbody tr {
+            border-bottom: 1px solid rgb(255, 255, 255);
+        }
+
+        .custom-table tbody tr:nth-of-type(even) {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .custom-table tbody tr:last-of-type {
+            border-bottom: 2px solid #1B8C8C;
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+            <a href="acceuil" class="logo me-auto"><img src="../images/sophacentre1.png" alt="SOPHA">Sophacentre</a>
+            <nav id="navbar" class="navbar order-last order-lg-0">
+                <ul>
+                    <li><a href="acceuil" class="active">Acceuil</a></li>
+                    <li><a href="/deconnexion">Se déconnecter</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140);">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h2>Mes Commandes</h2>
+                    <ol>
+                        <li><a href="acceuil">Accueil</a></li>
+                        <li><a href="mesCommandes">Mes Commandes</a></li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section id="blog" class="blog">
+            <div class="container" data-aos="fade-up">
+                <div class="row">
+                    <div class="col-lg-8 entries">
+                        <section id="services" class="services">
+                            <div class="container" data-aos="fade-up">
+                                <div class="row" style="margin-top: -8%;">
+                                    <div class="container mt-5">
+                                        <div class="panel panel-success">
+                                            <div class="panel-body">
+                                                <table class="custom-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">ID Commande</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Status</th>
+                                                            <th scope="col">Produits</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="commande : ${commandes}">
+                                                            <td th:text="${commande.id}">ID Commande</td>
+                                                            <td th:text="${commande.dateCommande}">Date</td>
+                                                            <td th:text="${commande.status}">Status</td>
+                                                            <td>
+                                                                <ul>
+                                                                    <li th:each="ligne : ${commande.lignesCommande}" th:text="${ligne.produit.nomProduit}">Produit</li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="sidebar">
+                            <h3 class="sidebar-title">Search</h3>
+                            <div class="sidebar-item search-form">
+                                <form id="search-form">
+                                    <input type="text" id="search-input" placeholder="Rechercher des produits">
+                                    <button type="submit" style="background-color: rgb(1, 103, 103);"><i class="bi bi-search"></i></button>
+                                </form>
+                            </div>
+                            <br>
+                            <br>
+                            <div class="sidebar-item categories container">
+                                <ul>
+                                    <li><a class="sidebar-title" href="monProfile">Mon profil</a></li>
+                                    <li><a class="sidebar-title" href="produits">Produits</a></li>
+                                    <li><a class="sidebar-title" href="panier">Panier</a></li>
+                                    <li><a class="sidebar-title" href="mesCommandes">Mes commandes</a></li>
+                                    <li><a class="sidebar-title" href="/notifications">Notification</a></li>
+                                    <li><a class="sidebar-title" href="/user">Accueil</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<footer id="footer" class="footer-custom">
+  <div class="container footer-bottom clearfix">
+    <div class="contact-info text-center">
+      <h3>Contact</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-telephone"></i>
+          <span>Tel:</span> +212 5 37 28 83 50
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-printer"></i>
+          <span>Fax:</span> 05 37 79 51 05
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-envelope"></i>
+          <span>E-mail:</span> <a href="mailto:contact@sophacentre.ma">contact@sophacentre.ma</a>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-globe"></i>
+          <span>Web:</span> <a href="https://www.sophacentre.ma">www.sophacentre.ma</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-geo-alt"></i>
+          <span>Location:</span> Avenue Al Majd ang rue Errakhae q.i. C.y.m., 10130 RABAT
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+     <script>
+       document.addEventListener("DOMContentLoaded", function() {
+    var searchForm = document.getElementById("search-form");
+
+    searchForm.addEventListener("submit", function(event) {
+        event.preventDefault();
+        var searchInput = document.getElementById("search-input").value.trim();
+        var rows = document.querySelectorAll("#main table tbody tr");
+
+        rows.forEach(function(row) {
+            var orderId = row.querySelector("td:nth-child(1)").textContent.trim();
+            if (searchInput === "" || orderId === searchInput) {
+                if (orderId === "ID Commande") {
+                    row.style.display = "table-row";
+                } else {
+                    row.style.display = ""; // Afficher la commande correspondante
+                }
+            } else {
+                row.style.display = "none"; // Masquer les lignes qui ne correspondent pas
+            }
+        });
+
+        var notFoundMessage = document.getElementById("not-found-message");
+        // Afficher un message si aucune commande correspondante n'est trouvée
+        if (searchInput !== "" && document.querySelectorAll("#main table tbody tr[style='display: table-row;']").length === 0) {
+            notFoundMessage.style.display = "block";
+        } else {
+            notFoundMessage.style.display = "none";
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="icon" type="image/png" href="gpi.png">
+  <title>CREER-PRODUIT</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .custom-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        padding: 12px 15px;
+        text-align: left;
+    }
+
+    .custom-table thead th {
+        background-color: rgb(255, 255, 255);
+        color: #1B8C8C;
+        font-weight: bold;
+    }
+
+    .custom-table tbody tr {
+        border-bottom: 1px solid rgb(255, 255, 255);
+    }
+
+    .custom-table tbody tr:nth-of-type(even) {
+        background-color: rgb(255, 255, 255);
+    }
+
+    .custom-table tbody tr:last-of-type {
+        border-bottom: 2px solid #1B8C8C;
+    }
+  </style>
+</head>
+
+<body>
+  
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+         <a href="acceuil" class="logo me-auto"><img src="../images/sophacentre1.png" alt="SOPHA">Sophacentre</a>
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a href="acceuil" class="active">Acceuil</a></li>
+              <li><a href="/deconnexion">Se déconnecter</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav>
+        </div>
+      </header>
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140);">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Creer Produit</h2>
+          <ol>
+            <li><a href="admin">ACCEUIL</a></li>
+            <li><a href="creer_Produit">Creer Produit</a></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row">
+          <div class="col-lg-8 entries">
+            <section id="services" class="services">
+                <div class="container" data-aos="fade-up">
+                  <div class="row" style="margin-top: -8%;">
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-4">
+                            <!-- Formulaire d'ajout de produit -->
+                            <form action="ajouterProduit">
+                                <button type="submit" style="width:200px; background:#1B8C8C;" class="btn btn-success">
+                                    Ajouter Produit
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- Formulaire d'ajout de produit -->
+                            <form action="modifierProduit">
+                              <button type="submit" style="width:200px; background:#1B8C8C;" class="btn btn-success">
+                                Modifier Produit
+                              </button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- Formulaire de recherche -->
+                            <form id="search-form"> 
+                                <div class="input-group" style="margin-bottom:10%;">
+                                    <input type="text" id="search-input" class="form-control rounded" placeholder="recherche produit" />
+                                    <button type="submit" style="background:#1B8C8C ; color:white;" id="submitBtn" class="btn">chercher</button>
+                                </div>  
+                            </form>
+                        </div>
+                      </div>
+
+                      <div class="container mt-5">
+                        <div class="panel panel-success">
+                          <div class="panel-body">
+                            <table class="custom-table" id="product-table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">Nom</th>
+                                  <th scope="col">Fab</th>
+                                  <th scope="col">Exp</th>
+                                  <th scope="col">Prix</th>
+                                  <th scope="col">P.Vente</th>
+                                  <th scope="col">Qté</th>
+                                  <th scope="col">Actions</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- Utilisez th:each pour itérer sur la liste de produits -->
+                                <tr th:each="produit : ${produits}" class="product-card">
+                                  <!-- Affichez les attributs de chaque produit -->
+                                  <td th:text="${produit.nomProduit}" class="card-title"></td>
+                                  <td th:text="${#dates.format(produit.dateDeFabrication, 'dd/MM/yyyy')}"></td>
+                                  <td th:text="${#dates.format(produit.dateDExpiration, 'dd/MM/yyyy')}"></td>
+                                  <td th:text="${produit.prix}"></td>
+                                  <td th:text="${produit.prixVente}"></td>
+                                  <td th:text="${produit.quantite}"></td>
+                                  <td>
+                                      <a th:href="@{'/deleteProduit/' + ${produit.id}}" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');" class="btn btn-danger btn-sm">
+                                       <i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i>
+                                     </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div id="no-products-message" style="display: none;">Aucun produit trouvé.</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>     
+                  </div>
+              </section>
+              
+            </div>
+
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form id="sidebar-search-form">
+                  <input type="text" id="sidebar-search-input">
+                  <button style="background-color: rgb(1, 103, 103);" type="submit" id="sidebar-submitBtn"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End sidebar search formn-->
+             <br>
+             <br>
+              <div class="sidebar-item categories container">
+                <ul>
+                  <li><a class="sidebar-title" href="monProfile">Mon profil</a></li>
+                  <li><a class="sidebar-title" href="creer_Produit">gestion des produits</a></li>
+                  <li><a class="sidebar-title" href="/produitsPerimes">Les produits périmés</a></li>
+                  <li><a class="sidebar-title" href="/produitsTermines">Les produits terminés</a></li>
+                  <li><a class="sidebar-title" href="toutesLesCommandes">gestion des commandes</a></li>
+                   <li><a class="sidebar-title" href="admin">Statistiques</a></li>
+                   <li><a class="sidebar-title" href="clientsRole2">visualiser les clients</a></li>              
+                  <li><a class="sidebar-title" href="admin">Acceuil</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <script src="assets/js/main.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const searchInputs = [document.getElementById('search-input'), document.getElementById('sidebar-search-input')];
+      const productTable = document.getElementById('product-table');
+      const noProductsMessage = document.getElementById('no-products-message');
+
+      searchInputs.forEach(searchInput => {
+        searchInput.addEventListener('input', function() {
+          const filter = searchInput.value.toLowerCase();
+          const rows = productTable.getElementsByTagName('tr');
+          let visibleRowCount = 0;
+
+          for (let i = 1; i < rows.length; i++) { // Start from 1 to skip the header row
+            const row = rows[i];
+            const productNameCell = row.getElementsByTagName('td')[0];
+            if (productNameCell) {
+              const productName = productNameCell.textContent || productNameCell.innerText;
+              if (productName.toLowerCase().indexOf(filter) > -1) {
+                row.style.display = '';
+                visibleRowCount++;
+              } else {
+                row.style.display = 'none';
+              }
+            }
+          }
+
+          noProductsMessage.style.display = visibleRowCount === 0 ? 'block' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

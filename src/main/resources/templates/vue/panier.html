@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            background-color: #eae8e8;
+        }
+        .card {
+            border-radius: 15px;
+        }
+        .img-fluid {
+            max-width: 100px;
+        }
+        .card-body p {
+            margin: 0;
+        }
+        .btn-home {
+            background-color: #6c757d;
+            color: white;
+            margin-right: 10px;
+        }
+        .btn-home:hover {
+            background-color: #5a6268;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+        }
+        .h-custom {
+            height: 100vh !important;
+        }
+        .bg-grey {
+            background-color: rgb(25, 150, 140);
+        }
+        .text-white {
+            color: white !important;
+        }
+        .btn-dark-gray {
+            background-color: #eae8e8;
+            border: none;
+            color: black;
+        }
+        .btn-dark-gray:hover {
+            background-color: #343a40;
+            color: white;
+        }
+        @media (min-width: 992px) {
+            .card-registration-2 .bg-grey {
+                border-top-right-radius: 16px;
+                border-bottom-right-radius: 16px;
+            }
+        }
+        @media (max-width: 991px) {
+            .card-registration-2 .bg-grey {
+                border-bottom-left-radius: 16px;
+                border-bottom-right-radius: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="h-100 h-custom">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12">
+                    <div class="card card-registration card-registration-2">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <div class="col-lg-8">
+                                    <div class="p-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-5">
+                                            <h1 class="fw-bold mb-0 text-black">Votre Panier</h1>
+                                        </div>
+                                        <hr class="my-4">
+                                        <div th:each="item : ${produitsPanier}" class="row mb-4 d-flex justify-content-between align-items-center" id="produit-[[${item.id}]]">
+                                            <div class="col-md-2 col-lg-2 col-xl-2">
+                                                <img th:if="${!#strings.isEmpty(item.produit.imageBase64)}" th:src="'data:image/jpeg;base64,' + ${item.produit.imageBase64}" class="img-fluid rounded-3" alt="Produit Image">
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-3">
+                                                <p class="lead fw-normal mb-2" th:text="${item.produit.nomProduit}">Nom du Produit</p>
+                                            </div>
+                                            <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                <p class="mb-0"><span class="text-muted">Quantité: </span><span th:text="${item.quantite}">1</span></p>
+                                            </div>
+                                            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                <h6 class="mb-0" th:text="${item.produit.prixVente * item.quantite}">0.00</h6>
+                                            </div>
+                                            <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                <button class="btn btn-link text-danger px-2" 
+                                                        th:onclick="'supprimerProduit(' + ${item.id} + ')'">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <hr class="my-4">
+                                        <div class="pt-5">
+                                            <h6 class="mb-0"><a href="/produits" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Retour</a></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 bg-grey text-white">
+                                    <div class="p-5">
+                                        <h3 class="fw-bold mb-5 mt-2 pt-1 text-white">Résumé</h3>
+                                        <hr class="my-4">
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <h5 class="text-uppercase text-white">Total des articles</h5>
+                                            <h5 id="totalArticles" class="text-white">0</h5>
+                                        </div>
+                                        <hr class="my-4">
+                                        <div class="d-flex justify-content-between mb-5">
+                                            <h5 class="text-uppercase text-white">Prix total</h5>
+                                            <h5 id="totalAmountDisplay" class="text-white">0.00 MAD</h5>
+                                        </div>
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-dark-gray btn-block btn-lg" data-mdb-ripple-color="dark" data-toggle="modal" data-target="#checkoutModal">Passer à la caisse</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal pour passer à la caisse -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkoutModalLabel">Passer à la caisse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="checkoutForm" th:action="@{/passerCommande}" method="post">
+                        <div class="form-group">
+                            <label for="cardNumber">Numéro de la carte</label>
+                            <input type="text" class="form-control" id="cardNumber" name="cardNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="verificationCode">Code de vérification</label>
+                            <input type="text" class="form-control" id="verificationCode" name="verificationCode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="totalAmountModal">Montant total</label>
+                            <input type="text" class="form-control" id="totalAmountModal" name="totalAmount" readonly>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Passer la commande</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let totalAmount = 0;
+            let totalItems = 0;
+            $('div.row.mb-4').each(function() {
+                const prixText = $(this).find('h6.mb-0').text().replace(' MAD', '').trim();
+                const prixTotal = parseFloat(prixText);
+                if (!isNaN(prixTotal)) {
+                    totalAmount += prixTotal;
+                    totalItems++;
+                }
+            });
+            $('#totalAmountDisplay').text(totalAmount.toFixed(2) + ' MAD');
+            $('#totalArticles').text(totalItems);
+            $('#totalAmountModal').val(totalAmount.toFixed(2));
+
+            $('#checkoutForm').on('submit', function() {
+                let totalAmountValue = $('#totalAmountModal').val();
+                totalAmountValue = totalAmountValue.replace(' MAD', '').trim(); // Nettoyer la valeur
+                $('#totalAmountModal').val(totalAmountValue);
+            });
+        });
+
+        function supprimerProduit(panierId) {
+            if (confirm('Voulez-vous vraiment supprimer ce produit du panier?')) {
+                $.ajax({
+                    url: '/supprimerProduitPanier',
+                    type: 'POST',
+                    data: {
+                        id: panierId,
+                        _csrf: $('input[name="_csrf"]').val() // Inclure le jeton CSRF si Spring Security est utilisé
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            alert('Produit supprimé avec succès');
+                            // Suppression du produit dans l'interface utilisateur
+                            $('#produit-' + panierId).remove();
+                            // Recalculer le total
+                            recalculerTotal();
+                        } else {
+                            alert('Erreur lors de la suppression du produit');
+                        }
+                    },
+                    error: function() {
+                        alert('Erreur lors de la suppression du produit');
+                    }
+                });
+            }
+        }
+
+        function recalculerTotal() {
+            let totalAmount = 0;
+            let totalItems = 0;
+            $('div.row.mb-4').each(function() {
+                const prixText = $(this).find('h6.mb-0').text().replace(' MAD', '').trim();
+                const prixTotal = parseFloat(prixText);
+                if (!isNaN(prixTotal)) {
+                    totalAmount += prixTotal;
+                    totalItems++;
+                }
+            });
+            $('#totalAmountDisplay').text(totalAmount.toFixed(2) + ' MAD');
+            $('#totalArticles').text(totalItems);
+            $('#totalAmountModal').val(totalAmount.toFixed(2));
+        }
+    </script>
+</body>
+</html>

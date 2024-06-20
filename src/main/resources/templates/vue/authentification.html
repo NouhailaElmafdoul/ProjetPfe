@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zone-de-Inscription</title>
+    <link rel="stylesheet" href="/bootstrap-5.3.0-alpha3-dist/css/bootstrap.min.css">
+     
+   <style>
+   .register{
+    background-color: rgb(255, 255, 255);
+    padding: 1%;
+    border-radius: 30px;
+
+}
+.register-left{
+    text-align: center;
+}
+
+.register-right{
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}
+.register-left img{
+    margin-top: 45%;
+    width: 70%;
+    -webkit-animation: mover 2s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-20px); }
+}
+.register-left p{
+    font-weight: lighter;
+    padding: 12%;
+    margin-top: -9%;
+}
+.register .register-form{
+    padding: 10%;
+    margin-top: 10%;
+
+}
+.btnRegister{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+  background-color: rgb(26, 151, 151);;
+    color: #fff;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+
+.form-group{
+    margin-bottom: 4%;
+   
+}
+
+.register-heading{
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: -16%;
+    color: #495057;
+}
+.invalid-feedback {
+	font-size: 14px;
+	font-weight: 600;
+	text-align: left;
+}
+.is-invalid {
+    border-color: #dc3545; /* Couleur de bordure pour indiquer une erreur */
+    padding-right: calc(1.5em + .75rem); /* Ajouter un espace pour l'icône d'erreur */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8"><path fill="%23dc3545" d="M4 0l4 4H0l4-4zM4 8l4-4H0l4 4z"/></svg>'); /* Icône d'erreur, vous pouvez remplacer par votre propre image */
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem); /* Taille de l'icône d'erreur */
+}
+
+    </style>
+
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+<!-- Vendor CSS Files -->
+<link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+<link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+<link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+<link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+<link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+<link href="/assets/css/style.css" rel="stylesheet">
+
+</head>
+
+<body >
+
+    <header id="header" class="fixed-top">
+        <div class="container d-flex align-items-center">
+         <a href="acceuil" class="logo me-auto"><img src="/images/sophacentre1.png" alt="sopha">Sophacentre</a>
+          <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a href="acceuil" >Acceuil</a></li>
+              <li><a href="authentification" class="active">créer compte</a></li>
+              <li><a href="connexion">Se connecter</a></li>
+              
+    
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+          </nav><!-- .navbar -->
+    
+    
+        </div>
+      </header>
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140);">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>CRÉER COMPTE</h2>
+          <ol>
+            <li><a href="Acceuil.php">ACCEUIL</a></li>
+            <li>CRÉER COMPTE</li>
+          </ol>
+        </div>
+
+      </div>
+    </section>
+    <!--
+
+<div th:if="${error == true}" class="alert alert-danger" role="alert" style="text-align: center;">
+    <strong>Problème de saisie!</strong> 
+</div>  
+
+-->
+<div style="color:#1a6499;" class="container register">
+   <form id="" name="" method="post" action="/register" th:object="${user}" th:action="@{/register}">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img style="width: 90%;" src="/images/sophacentre1.png" alt="SOPHA"/>
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Inscription</h3>
+                    <div class="row register-form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" id="nom" name="nom" class="form-control" placeholder="Nom " th:field="*{nom}" th:errorClass="is-invalid"/>    
+                                <p th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="prenom" class="form-control" name="prenom" placeholder="Prénom " value="" th:field="*{prenom}" th:errorClass="is-invalid"/> 
+                                <p th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="age" name="age" class="form-control" placeholder="Age " value="" th:field="*{age}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="invalid-feedback"></p>                                                          
+                            </div>                        
+                            <div class="form-group">
+                                <input type="text" id="cin" name="cin" class="form-control" placeholder="Cin " value="" th:field="*{cin}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('cin')}" th:errors="*{cin}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="telephone" name="telephone" class="form-control" placeholder="Telephone " th:field="*{telephone}" value="" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Email" value="" th:field="*{email}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></p>                                                          
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" id="adresse" name="adresse" class="form-control" placeholder="Adresse " value="" th:field="*{adresse}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('adresse')}" th:errors="*{adresse}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <div class="form-group">
+                                <select id="genre" name="genre" class="form-control" th:field="*{genre}" style="color: rgb(154, 153, 150);" th:errorClass="is-invalid">
+                                    <option value="selectionner un genre">Sélectionner un genre</option>
+                                    <option value="homme">Homme</option>
+                                    <option value="femme">Femme</option>
+                                </select>
+                                <div th:if="${#fields.hasErrors('genre')}" th:errors="*{genre}" class="invalid-feedback"></div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="mot_de_passe" name="mot_de_passe" class="form-control" placeholder="Mot de passe " value="" th:field="*{mot_de_passe}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('mot_de_passe')}" th:errors="*{mot_de_passe}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <!-- Champs ajoutés pour la pharmacy -->
+                            <div class="form-group">
+                                <input type="text" id="nomPharmacy" name="nomPharmacy" class="form-control" placeholder="Nom de la pharmacy" value="" th:field="*{nomPharmacy}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('nomPharmacy')}" th:errors="*{nomPharmacy}" class="invalid-feedback"></p>                                                          
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="adressePharmacy" name="adressePharmacy" class="form-control" placeholder="Adresse de la pharmacy" value="" th:field="*{adressePharmacy}" th:errorClass="is-invalid"/>
+                                <p th:if="${#fields.hasErrors('adressePharmacy')}" th:errors="*{adressePharmacy}" class="invalid-feedback"></p>                                                          
+                            </div>
+                        </div>
+                        <input type="submit" id="envoyer" class="btnRegister" value="Envoyer"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+            </div>
+           
+</body>
+</html>

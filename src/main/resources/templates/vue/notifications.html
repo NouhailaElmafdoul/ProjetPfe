@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="icon" type="image/png" href="gpi.png">
+  <title>sopha-Client</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .notification-bubble {
+      position: relative;
+      background: #f8f9fa;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      margin: 15px;
+      padding: 20px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      font-size: 1.1em;
+      overflow: visible;
+      width: 115%;
+      max-width: 700px;
+    }
+
+    .notification-bubble:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 80px;
+      border-width: 12px 12px 0;
+      border-style: solid;
+      border-color: #f8f9fa transparent;
+      display: block;
+      width: 10px;
+    }
+
+    .notification-success {
+      border-color: #28a745;
+      background: #d4edda;
+    }
+
+    .notification-success:after {
+      border-color: #d4edda transparent;
+    }
+
+    .notification-danger {
+      border-color: #dc3545;
+      background: #f8d7da;
+    }
+
+    .notification-danger:after {
+      border-color: #f8d7da transparent;
+    }
+
+    .notification-time {
+      display: block;
+      font-size: 0.9em;
+      color: #6c757d;
+      text-align: right;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 1.2em;
+      cursor: pointer;
+      color: #6c757d;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <a href="acceuil" class="logo me-auto"><img src="../images/sophacentre1.png" alt="daret">sophacentre</a>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="acceuil" class="active">Acceuil</a></li>
+          <li><a href="/deconnexion">Se déconnecter</a></li>
+          <!-- Icone Panier -->
+          <li><a href="/panier" class="bi bi-cart">panier</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140);">
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Notifications</h2>
+          <ol>
+            <li><a href="acceuil">ACCEUIL</a></li>
+            <li>Notification</li>
+          </ol>
+        </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+      <div class="container" data-aos="fade-up">
+        <div class="row">
+          <div class="col-lg-8 entries">
+            <section id="services" class="services">
+              <div class="container" data-aos="fade-up">
+                <div class="row" id="notification-container">
+                  <div class="col-lg-8 entries">
+                    <h2>Notifications</h2>
+                    <ul class="list-group">
+                      <li th:each="notification : ${notifications}"
+    th:classappend="${notification.message.contains('refusée') ? 'notification-danger' : (notification.message.contains('approuvée') ? 'notification-success' : '')}"
+    class="notification-bubble"
+    th:attr="data-id=${notification.id}">
+    <button class="close-btn" onclick="removeNotification(this)">&times;</button>
+    <p th:text="${notification.message}"></p>
+    <small class="notification-time" th:text="${#dates.format(notification.date, 'yyyy-MM-dd HH:mm:ss')}"></small>
+</li>
+                    </ul>
+                  </div><!-- End blog entries list -->
+                </div><!-- End row -->
+              </div><!-- End container -->
+            </section>
+          </div><!-- End blog entries list -->
+
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <h3 class="sidebar-title">Search</h3>
+              <div class="sidebar-item search-form">
+                <form id="search-form">
+                  <input type="text" id="search-input" placeholder="Rechercher des produits">
+                  <button type="submit" style="background-color: rgb(1, 103, 103);"><i class="bi bi-search"></i></button>
+                </form>
+              </div><!-- End sidebar search form-->
+              <br>
+              <br>
+              <div class="sidebar-item categories container">
+                <ul>
+                   <li><a class="sidebar-title" href="monProfile">Mon profil</a></li>
+                <li><a class="sidebar-title" href="produits">Produits</a></li>
+                <li><a class="sidebar-title" href="panier">Panier</a></li>
+                <li><a class="sidebar-title" href="mesCommandes">Mes commande</a></li>
+                <li><a class="sidebar-title" href="/notifications">Notification</a></li>
+                <li><a class="sidebar-title" href="/user">Accueil</a></li>
+                </ul>
+              </div><!-- End sidebar categories-->
+            </div><!-- End sidebar -->
+          </div><!-- End blog sidebar -->
+        </div>
+      </div>
+    </section><!-- End Blog Section -->
+  </main>
+
+  <footer id="footer" class="footer-custom">
+    <div class="container footer-bottom clearfix">
+      <div class="contact-info text-center">
+        <h3>Contact</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="contact-item">
+            <i class="bi bi-telephone"></i>
+            <span>Tel:</span> +212 5 37 28 83 50
+          </div>
+          <div class="contact-item">
+            <i class="bi bi-printer"></i>
+            <span>Fax:</span> 05 37 79 51 05
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contact-item">
+            <i class="bi bi-envelope"></i>
+            <span>E-mail:</span> <a href="mailto:contact@sophacentre.ma">contact@sophacentre.ma</a>
+          </div>
+          <div class="contact-item">
+            <i class="bi bi-globe"></i>
+            <span>Web:</span> <a href="https://www.sophacentre.ma">www.sophacentre.ma</a>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="contact-item">
+            <i class="bi bi-geo-alt"></i>
+            <span>Location:</span> Avenue Al Majd ang rue Errakhae q.i. C.y.m., 10130 RABAT
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+  
+  
+  
+  <script>
+function removeNotification(button) {
+    const notificationElement = button.parentElement;
+    const notificationId = notificationElement.getAttribute('data-id');
+
+    fetch(`/notifications/${notificationId}`, {
+        method: 'DELETE'
+    }).then(response => {
+        if (response.ok) {
+            notificationElement.remove();
+        } else {
+            console.error('Erreur lors de la suppression de la notification');
+        }
+    }).catch(error => {
+        console.error('Erreur lors de la suppression de la notification', error);
+    });
+}
+</script>
+
+</body>
+</html>

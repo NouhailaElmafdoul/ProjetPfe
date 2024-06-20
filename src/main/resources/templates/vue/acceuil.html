@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Sopha-Acceuil</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <link rel="icon" type="image/png" href="/images/sophacentre1.png">
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <link href="/assets/css/style.css" rel="stylesheet">
+
+  <style>
+    .client-logo {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .client-logo i {
+      font-size: 3rem;
+      color: #20c997;
+      margin-bottom: 10px;
+    }
+
+    .description-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .description-container.active {
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      .clients-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .client-logo {
+        flex: 0 0 30%;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .clients-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .client-logo {
+        flex: 0 0 45%;
+      }
+    }
+
+.footer-custom {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+    
+  </style>
+</head>
+
+<body>
+
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+    <a href="acceuil" class="logo me-auto"><img width="15%" height="15%" src="../images/sophacentre1.png" alt="Sopha">sophacentre</a>
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li><a href="acceuil" class="active">Acceuil</a></li>
+        <li><a href="#services">Nos Engagements</a></li>
+         <li><a href="#footer">Nos contact</a></li>
+        <li><a href="connexion">Se connecter</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
+</header>
+
+<section id="hero">
+  <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner" role="listbox">
+      <div class="carousel-item active" style="background-image: url('../images/photo.jpg');">
+        <div class="carousel-container">
+          <div class="carousel-content animate__animated animate__fadeInUp">
+            <h2>Bienvenue sur <span>notre site de Sophacentre</span></h2>
+            <p>
+              Depuis 1979, Sophacentre met toute son expertise logistique au service des pharmaciens pour une mise à disposition des médicaments et spécialités médicales aux patients dans les meilleurs délais et dans des conditions de sécurité optimales.
+            </p>
+            <p>
+              Acteur majeur de la distribution pharmaceutique avec 20% de PDM, notre savoir-faire permet d'assurer avec minutie, rigueur et efficacité les préparations de commandes de produits de santé.
+            </p>
+            <p>
+              Plus de 5 millions de livraisons par an mobilisent nos 1 500 collaborateurs et nos 8 sites de distribution, jours et nuits, afin de servir l’ensemble du territoire marocain.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('../images/unnamed.jpg');">
+        <div class="carousel-container">
+          <div class="carousel-content animate__animated animate__fadeInUp">
+            <h2>Qualité des Produits</h2>
+            <p>Chez Sophacentre, la qualité des produits est au cœur de notre engagement envers nos clients. Nous travaillons en étroite collaboration avec les meilleurs fournisseurs pour garantir que chaque médicament et spécialité médicale répond aux normes les plus strictes de qualité et de sécurité. Notre engagement envers l'excellence se reflète dans chaque produit que nous distribuons, assurant la confiance et la satisfaction de nos clients.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item" style="background-image: url('../images/livraison3.jpg');">
+        <div class="carousel-container">
+          <div class="carousel-content animate__animated animate__fadeInUp">
+            <h2>Sécurité de la Livraison</h2>
+            <p>Notre engagement envers la sécurité de la livraison est une priorité absolue chez Sophacentre. Nous mettons en œuvre des protocoles stricts pour garantir que chaque médicament et spécialité médicale atteigne nos clients dans les meilleures conditions. Nos processus de contrôle de qualité et de suivi des colis assurent une livraison fiable et sécurisée à chaque étape du processus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#heroCarousel" role="button" data-bs-slide="next">
+      <span class="carousel-control-next-icon bi bi-chevron-right" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </a>
+    <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+  </div>
+</section>
+
+<main id="main">
+  <section id="clients" class="clients">
+    <div class="container" data-aos="fade-up">
+      <div class="section-title">
+        <h2>Nos Engagements</h2>
+      </div>
+      <div id="services" class="clients-wrap clearfix" data-aos="fade-up">
+        <div id="client-logo1" class="client-logo">
+          <i class="bi bi-person-check-fill"></i>
+          <p>Au service des pharmaciens</p>
+          
+        </div>
+        <div id="client-logo2" class="client-logo">
+          <i class="bi bi-gear-fill"></i>
+          <p>Maîtrise de l’approvisionnement</p>
+          
+        </div>
+        <div id="client-logo3" class="client-logo">
+          <i class="bi bi-shield-fill-check"></i>
+          <p>Sécurité des produits</p>
+         
+        </div>
+        <div id="client-logo4" class="client-logo">
+          <i class="bi bi-heart-fill"></i>
+          <p>Ethique</p>
+          
+        </div>
+        <div id="client-logo5" class="client-logo">
+          <i class="bi bi-award-fill"></i>
+          <p>Démarche qualité</p>
+          
+        </div>
+        <div id="client-logo6" class="client-logo">
+          <i class="bi bi-box-seam"></i>
+          <p>La traçabilité</p>
+          
+        </div>
+      </div>
+    </div>
+  </section>
+</main><!-- End #main -->
+
+<footer id="footer" class="footer-custom">
+  <div class="container footer-bottom clearfix">
+    <div class="contact-info text-center">
+      <h3>Contact</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-telephone"></i>
+          <span>Tel:</span> +212 5 37 28 83 50
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-printer"></i>
+          <span>Fax:</span> 05 37 79 51 05
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-envelope"></i>
+          <span>E-mail:</span> <a href="mailto:contact@sophacentre.ma">contact@sophacentre.ma</a>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-globe"></i>
+          <span>Web:</span> <a href="https://www.sophacentre.ma">www.sophacentre.ma</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-geo-alt"></i>
+          <span>Location:</span> Avenue Al Majd ang rue Errakhae q.i. C.y.m., 10130 RABAT
+        </div>
+      </div>
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/assets/js/main.js"></script>
+
+
+</body>
+
+</html>

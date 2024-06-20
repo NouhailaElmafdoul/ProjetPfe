@@ -1,0 +1,388 @@
+<meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <link rel="icon" type="image/png" href="gpi.png">
+  <title>sopha-Client</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  
+  <style>
+    .product-card {
+      border: none;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .product-card .card-body {
+      padding: 10px;
+      text-align: center;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 8px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    
+    .card-title {
+      font-size: 1em;
+      color: #333;
+      margin-bottom: 0.5em;
+    }
+
+    .card-text {
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .btn-ajouter {
+      background-color: rgb(27, 140, 140);
+      color: white;
+      font-size: 0.9em;
+    }
+    
+    .btn-ajouter:hover {
+      background-color:#20B2AA;
+    }
+
+    .no-products {
+      text-align: center;
+      font-size: 18px;
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center">
+      <a href="acceuil" class="logo me-auto"><img src="../images/sophacentre1.png" alt="sopha">sophacentre</a>
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a href="acceuil" class="active">Acceuil</a></li>
+          <li><a href="/deconnexion">Se déconnecter</a></li>  
+          <!-- Icone Panier -->
+          <li><a href="/panier" class="bi bi-cart">panier</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+  </header>
+
+  <main id="main">
+  <!-- ======= Breadcrumbs ======= -->
+  <section id="breadcrumbs" class="breadcrumbs" style="background-color: rgb(27, 140, 140);">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h3 style="color: white;">Client</h3>
+        <ol>
+          <li><a href="acceuil" style="color: white;">ACCEUIL</a></li>
+         <li style="color: white;" th:text="${user.prenom}"></li>
+        </ol>
+      </div>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+  <!-- ======= Blog Section ======= -->
+  <section id="blog" class="blog">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="col-lg-8 entries">
+          <section id="services" class="services">
+            <div class="container" data-aos="fade-up">
+              <div class="row" id="product-container">
+                
+                <div id="no-products-message" class="no-products" style="display: none;">Aucun produit trouvé</div>
+
+                <!-- Message produit non trouvé -->
+                <div th:if="${#lists.isEmpty(produits)}" id="no-products-message" class="no-products">Produit non trouvé</div>
+                <!-- Liste des produits -->
+                <div th:each="produit, iterStat : ${produits}" class="col-lg-4 col-md-6 mb-4">
+                  <div class="product-card card">
+                    <img th:if="${!#strings.isEmpty(produit.imageBase64)}" th:src="'data:image/jpeg;base64,' + ${produit.imageBase64}" class="card-img-top" alt="Produit Image">
+                    <div class="card-body">
+                      <h5 class="card-title" th:text="${produit.nomProduit}">Nom du Produit</h5>
+                      <p class="card-text"><strong>Prix: </strong><span th:text="${produit.prixVente} + ' MAD'"></span></p>
+                      <p class="card-text"><strong>Date de fabrication: </strong><span th:text="${#dates.format(produit.dateDeFabrication, 'dd/MM/yyyy')}"></span></p>
+                      <p class="card-text"><strong>Date d'expiration: </strong><span th:text="${#dates.format(produit.dateDExpiration, 'dd/MM/yyyy')}"></span></p>
+                      <!-- Bouton pour ouvrir le modal -->
+                      <button type="button" class="btn btn-ajouter" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#addToCartModal"
+                        th:attr="data-product-id=${produit.id}, data-product-price=${produit.prixVente}, data-product-quantity=${produit.quantite}">Ajouter au Panier</button>
+                      <div>
+                        <small class="text-muted" th:if="${produit.quantite > 0}">Disponible</small>
+                        <small class="text-muted" th:if="${produit.quantite == 0}">Non disponible</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End produit card -->
+              </div><!-- End row -->
+            </div><!-- End container -->
+          </section>
+
+          <div class="blog-pagination">
+            <ul class="justify-content-center">
+              <li class="page-item"><a class="page-link" href="#" id="prev-btn" onclick="prevPage()">Previous</a></li>
+              <li class="page-item"><a class="page-link" href="#" id="next-btn" onclick="nextPage()">Next</a></li>
+            </ul>
+          </div>
+        </div><!-- End blog entries list -->
+
+        <div class="col-lg-4">
+          <div class="sidebar">
+            <h3 class="sidebar-title">Search</h3>
+           
+           <div class="sidebar-item search-form">
+              <form id="search-form">
+                <input type="text" id="search-input" placeholder="Rechercher des produits">
+                <button type="submit" style="background-color: rgb(1, 103, 103);"><i class="bi bi-search"></i></button>
+              </form>
+            </div><!-- End sidebar search form-->
+            <br>
+            <br>
+            <div class="sidebar-item categories container">
+              <ul>
+                <li><a class="sidebar-title" href="monProfile">Mon profil</a></li>
+                <li><a class="sidebar-title" href="produits">Produits</a></li>
+                <li><a class="sidebar-title" href="panier">Panier</a></li>
+                <li><a class="sidebar-title" href="mesCommandes">Mes commande</a></li>
+                <li><a class="sidebar-title" href="/notifications">Notification</a></li>
+              </ul>
+            </div><!-- End sidebar categories-->
+          </div><!-- End sidebar -->
+        </div><!-- End blog sidebar -->
+      </div>
+    </div>
+  </section><!-- End Blog Section -->
+</main>
+
+<footer id="footer" class="footer-custom">
+  <div class="container footer-bottom clearfix">
+    <div class="contact-info text-center">
+      <h3>Contact</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-telephone"></i>
+          <span>Tel:</span> +212 5 37 28 83 50
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-printer"></i>
+          <span>Fax:</span> 05 37 79 51 05
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-envelope"></i>
+          <span>E-mail:</span> <a href="mailto:contact@sophacentre.ma">contact@sophacentre.ma</a>
+        </div>
+        <div class="contact-item">
+          <i class="bi bi-globe"></i>
+          <span>Web:</span> <a href="https://www.sophacentre.ma">www.sophacentre.ma</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="contact-item">
+          <i class="bi bi-geo-alt"></i>
+          <span>Location:</span> Avenue Al Majd ang rue Errakhae q.i. C.y.m., 10130 RABAT
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <!-- Modal pour ajouter au panier -->
+ <div class="modal fade" id="addToCartModal" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addToCartModalLabel">Ajouter au Panier</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Formulaire pour ajouter au panier -->
+        <form th:action="@{/ajouterAuPanier}" method="post">
+          <input type="hidden" name="produitId" id="modalProductId">
+          <div class="mb-3">
+            <label for="quantity" class="form-label">Quantité</label>
+            <input type="number" class="form-control" id="quantity" name="quantite" min="1" value="1">
+          </div>
+          <div class="mb-3">
+            <label for="totalPrice" class="form-label">Prix Total</label>
+            <input type="text" class="form-control" id="totalPrice" readonly>
+          </div>
+          <!-- Message d'erreur pour la quantité -->
+          <div id="quantity-error" class="alert alert-danger" style="display: none;">Impossible: quantité demandée supérieure à la quantité disponible</div>
+          <button type="submit" class="btn btn-primary" id="add-to-cart-button" disabled>Ajouter au Panier</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var addToCartModal = document.getElementById('addToCartModal');
+    var quantityInput = document.getElementById('quantity');
+    var totalPriceInput = document.getElementById('totalPrice');
+    var quantityError = document.getElementById('quantity-error');
+    var addToCartButton = document.getElementById('add-to-cart-button');
+
+    var productPrice = 0;
+    var productQuantity = 0;
+
+    addToCartModal.addEventListener('show.bs.modal', function (event) {
+      var button = event.relatedTarget; // Button that triggered the modal
+      var productId = button.getAttribute('data-product-id'); // Extract product ID from data-* attributes
+      productPrice = parseFloat(button.getAttribute('data-product-price')); // Extract product price from data-* attributes
+      productQuantity = parseInt(button.getAttribute('data-product-quantity')); // Extract product quantity from data-* attributes
+      var modalProductId = addToCartModal.querySelector('#modalProductId');
+      modalProductId.value = productId; // Update the modal's content
+
+      // Initial total price calculation
+      var quantity = parseInt(quantityInput.value);
+      totalPriceInput.value = (quantity * productPrice).toFixed(2) + ' MAD';
+
+      // Initial check for quantity
+      if (quantity > productQuantity) {
+        quantityError.style.display = 'block';
+        addToCartButton.disabled = true;
+      } else {
+        quantityError.style.display = 'none';
+        addToCartButton.disabled = false;
+      }
+    });
+
+    // Update total price and check quantity when quantity changes
+    quantityInput.addEventListener('input', function() {
+      var quantity = parseInt(quantityInput.value);
+      totalPriceInput.value = (quantity * productPrice).toFixed(2) + ' MAD';
+
+      if (quantity > productQuantity) {
+        quantityError.style.display = 'block';
+        addToCartButton.disabled = true;
+      } else {
+        quantityError.style.display = 'none';
+        addToCartButton.disabled = false;
+      }
+    });
+  });
+    // Pagination Script
+    document.addEventListener('DOMContentLoaded', () => {
+      const productsPerPage = 6;
+      let currentPage = 1;
+      const products = document.querySelectorAll('.product-card');
+
+      function showPage(page) {
+        const start = (page - 1) * productsPerPage;
+        const end = start + productsPerPage;
+
+        products.forEach((product, index) => {
+          if (index >= start && index < end) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+
+        document.getElementById('prev-btn').style.display = page > 1 ? 'block' : 'none';
+        document.getElementById('next-btn').style.display = end < products.length ? 'block' : 'none';
+      }
+
+      function nextPage() {
+        currentPage++;
+        showPage(currentPage);
+      }
+
+      function prevPage() {
+        currentPage--;
+        showPage(currentPage);
+      }
+
+      document.getElementById('next-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        nextPage();
+      });
+
+      document.getElementById('prev-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        prevPage();
+      });
+
+      showPage(currentPage);
+    });
+
+    // Search Script
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('search-input');
+      const productCards = document.querySelectorAll('.product-card');
+      const noProductsMessage = document.getElementById('no-products-message');
+
+      searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        let foundProducts = false;
+
+        productCards.forEach((card) => {
+          const productName = card.querySelector('.card-title').textContent.toLowerCase();
+          if (productName.includes(searchTerm)) {
+            card.style.display = 'block';
+            foundProducts = true;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        // Affiche un message si aucun produit n'est trouvé
+        if (foundProducts) {
+          noProductsMessage.style.display = 'none';
+        } else {
+          noProductsMessage.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
