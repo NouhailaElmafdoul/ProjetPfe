@@ -43,13 +43,11 @@ public class PanierController {
 
     @GetMapping("/panier")
     public String afficherPanier(Model model) {
-        // Récupérer l'utilisateur authentifié
         String email = getAuthenticatedUserEmail();
         Optional<User> optionalUser = userRepository.findByEmail(email);
 
         User user = optionalUser.orElseThrow(() -> new IllegalArgumentException("Utilisateur non trouvé"));
 
-        // Récupérer les produits du panier pour l'utilisateur authentifié
         List<Panier> produitsPanier = panierRepository.findByUserId(user.getId());
         produitsPanier.forEach(panier -> {
             Produit produit = panier.getProduit();
@@ -59,7 +57,7 @@ public class PanierController {
             }
         });
         model.addAttribute("produitsPanier", produitsPanier);
-        return "vue/panier"; // Nom de la vue Thymeleaf pour afficher le panier
+        return "vue/panier"; 
     }
 
 

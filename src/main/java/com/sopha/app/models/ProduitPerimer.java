@@ -20,7 +20,7 @@ public class ProduitPerimer {
     private Double prixVente;
     private Integer quantite;
 
-    // Constructeurs, getters, et setters
+  
     public ProduitPerimer() {}
 
     public ProduitPerimer(String nomProduit, Date dateDeFabrication, Date dateDExpiration, Double prix, Double prixVente, Integer quantite) {
@@ -88,7 +88,7 @@ public class ProduitPerimer {
 		this.quantite = quantite;
 	}
 
-    // Getters et setters ici
+    
     
     
 }

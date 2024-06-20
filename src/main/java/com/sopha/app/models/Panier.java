@@ -26,9 +26,9 @@ public class Panier {
     private Double prixTotal;
 
     @ManyToOne
-    private User user; // Ajout de la relation avec User
+    private User user;
 
-    // Constructeurs
+    
     public Panier() {
         super();
     }
@@ -82,7 +82,7 @@ public class Panier {
         this.user = user;
     }
 
-    // Méthode toString pour faciliter l'affichage des informations du panier
+    
     @Override
     public String toString() {
         return "Panier [id=" + id + ", produit=" + produit + ", quantite=" + quantite + ", prixTotal=" + prixTotal + ", user=" + user + "]";

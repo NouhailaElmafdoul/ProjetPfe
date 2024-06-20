@@ -11,7 +11,7 @@ public class PanierService {
     private PanierRepository panierRepository;
 
     public void supprimerProduitDuPanier(Long produitId) {
-        panierRepository.deleteById(produitId); // Supprime le produit de la table panier
+        panierRepository.deleteById(produitId); 
     }
 
 }

@@ -61,12 +61,11 @@ public class sophaController {
         User user = userDetailService.getCurrentAuthenticatedUser();
         model.addAttribute("user", user);
 
-        // Récupérer les statistiques
+        
         List<Object[]> topClients = commandeService.getTopClients();
         List<Object[]> topSellingProducts = commandeService.getTopSellingProducts();
         Double totalGains = commandeService.getTotalGainsApprovedOrders();
 
-        // Ajouter les statistiques au modèle
         model.addAttribute("topClients", topClients);
         model.addAttribute("topSellingProducts", topSellingProducts);
         model.addAttribute("totalGains", totalGains);

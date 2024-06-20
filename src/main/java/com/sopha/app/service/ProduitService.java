@@ -35,7 +35,7 @@ public class ProduitService {
     @Autowired
     private UserRepository userRepository;
 
-    @Scheduled(fixedRate = 86400000) // Vérifie tous les jours
+    @Scheduled(fixedRate = 86400000) 
     @Transactional
     public void transfererProduitsPerimes() {
         Date now = new Date();
@@ -60,7 +60,7 @@ public class ProduitService {
         Produit produit = produitRepository.findById(produitId)
                 .orElseThrow(() -> new IllegalArgumentException("Produit non trouvé"));
 
-        // Récupérer l'utilisateur authentifié
+        
         String email = getAuthenticatedUserEmail();
         Optional<User> optionalUser = userRepository.findByEmail(email);
 

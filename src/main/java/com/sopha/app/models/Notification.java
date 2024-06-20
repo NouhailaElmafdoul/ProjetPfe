@@ -27,7 +27,7 @@ public class Notification {
        
     }
 
-    // Getters et setters
+    
 
     public Long getId() {
         return id;

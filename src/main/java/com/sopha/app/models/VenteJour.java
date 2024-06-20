@@ -22,7 +22,6 @@ public class VenteJour {
         this.totalVentes = totalVentes;
     }
 
-    // Getters et setters
     public Long getId() {
         return id;
     }

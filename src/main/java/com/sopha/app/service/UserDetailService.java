@@ -50,7 +50,7 @@ public class UserDetailService implements UserDetailsService {
     @Transactional
     public List<User> getUsersWithCommandesByRole(Long roleId) {
         List<User> users = userRepo.findByRoleId(roleId);
-        users.forEach(user -> user.getCommandes().size()); // Charger explicitement les commandes
+        users.forEach(user -> user.getCommandes().size()); 
         return users;
     }
 }

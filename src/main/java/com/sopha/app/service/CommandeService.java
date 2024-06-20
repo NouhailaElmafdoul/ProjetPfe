@@ -42,7 +42,7 @@ public class CommandeService {
         commande.setStatus("En attente");
         commandeRepository.save(commande);
 
-        // Ajouter les produits du panier à la commande
+        
         List<Panier> panierList = panierRepository.findByUserId(user.getId());
         for (Panier panier : panierList) {
             LigneCommande ligneCommande = new LigneCommande();
@@ -53,7 +53,7 @@ public class CommandeService {
             ligneCommandeRepository.save(ligneCommande);
         }
 
-        // Vider le panier de l'utilisateur
+       
         panierRepository.deleteAll(panierList);
 
         return commande;
@@ -78,10 +78,10 @@ public class CommandeService {
             Commande commande = optionalCommande.get();
             commande.setStatus(newStatus);
 
-            // Charger explicitement les lignes de commande
+            
             commande.getLignesCommande().size();
 
-            // Si la commande est approuvée, mettre à jour les ventes journalières
+            
             if ("APPROUVÉ".equals(newStatus)) {
                 updateDailySales(commande);
             }
